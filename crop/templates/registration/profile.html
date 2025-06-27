@@ -1,0 +1,21 @@
+{% extends 'crop/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>Welcome, {{ user.username }}!</h2>
+    <div class="card p-4">
+        <div class="text-center mb-3">
+            {% if profile.photo %}
+                <img src="{{ profile.photo.url }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+            {% else %}
+                <img src="/media/profile_photos/default.png" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+            {% endif %}
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ profile_form.as_p }}
+            <button type="submit" class="btn btn-primary mt-3">Update Profile</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
